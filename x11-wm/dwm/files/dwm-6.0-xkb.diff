@@ -1,0 +1,65 @@
+commit 29a6cfd48668da4cd6436dd429a9c29f54940a60
+Author: Comrade DOS <dos@hidevlab.com>
+Date:   Fri Jun 8 19:31:45 2012 +0700
+
+    Save keyboard layout state for each window.
+
+diff --git a/dwm.c b/dwm.c
+index 2477f74..bcd36a0 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -96,6 +96,7 @@ struct Client {
+     Client *snext;
+     Monitor *mon;
+     Window win;
++    int XkbGroup;
+ };
+ 
+ typedef struct {
+@@ -824,11 +825,11 @@ enternotify(XEvent *e) {
+     c = wintoclient(ev->window);
+     m = c ? c->mon : wintomon(ev->window);
+     if(m != selmon) {
+-        unfocus(selmon->sel, True);
+         selmon = m;
+     }
+     else if(!c || c == selmon->sel)
+         return;
++    unfocus(selmon->sel, True);
+     focus(c);
+ }
+ 
+@@ -857,6 +858,7 @@ focus(Client *c) {
+         attachstack(c);
+         grabbuttons(c, True);
+         XSetWindowBorder(dpy, c->win, dc.sel[ColBorder]);
++        XkbLockGroup(dpy, XkbUseCoreKbd, c->XkbGroup);
+         setfocus(c);
+     }
+     else
+@@ -1117,6 +1119,7 @@ manage(Window w, XWindowAttributes *wa) {
+     if(!(c = calloc(1, sizeof(Client))))
+         die("fatal: could not malloc() %u bytes\n", sizeof(Client));
+     c->win = w;
++    c->XkbGroup = 0;
+     updatetitle(c);
+     if(XGetTransientForHint(dpy, w, &trans) && (t = wintoclient(trans))) {
+         c->mon = t->mon;
+@@ -1774,12 +1777,17 @@ toggleview(const Arg *arg) {
+ 
+ void
+ unfocus(Client *c, Bool setfocus) {
++    XkbStateRec state;
++
+     if(!c)
+         return;
+     grabbuttons(c, False);
+     XSetWindowBorder(dpy, c->win, dc.norm[ColBorder]);
+     if(setfocus)
+         XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
++
++    XkbGetState(dpy, XkbUseCoreKbd, &state);
++    c -> XkbGroup = state.group;
+ }
+ 
+ void

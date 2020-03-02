@@ -1,0 +1,27 @@
+commit 3a805c84b8ed70a9ed345da289c43217dca4f36e
+Author: Comrade DOS <dos@hidevlab.com>
+Date:   Fri Jun 8 15:35:08 2012 +0700
+
+    Fix deprecation warning.
+
+diff --git a/dwm.c b/dwm.c
+index b927ef5..2477f74 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -39,6 +39,7 @@
+ #ifdef XINERAMA
+ #include <X11/extensions/Xinerama.h>
+ #endif /* XINERAMA */
++#include <X11/XKBlib.h>
+ 
+ /* macros */
+ #define BUTTONMASK              (ButtonPressMask|ButtonReleaseMask)
+@@ -1084,7 +1085,7 @@ keypress(XEvent *e) {
+     XKeyEvent *ev;
+ 
+     ev = &e->xkey;
+-    keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
++    keysym = XkbKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0, 0);
+     for(i = 0; i < LENGTH(keys); i++)
+         if(keysym == keys[i].keysym
+         && CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
