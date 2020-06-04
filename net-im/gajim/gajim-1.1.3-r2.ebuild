@@ -18,10 +18,10 @@ SLOT="0"
 #KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
 KEYWORDS="~amd64 ~x86"
 IUSE="+crypt geolocation jingle networkmanager remote rst +spell upnp
-	+webp"
+	+webp keyring"
 
 COMMON_DEPEND="
-	dev-libs/gobject-introspection
+	dev-libs/gobject-introspection[cairo(+)]
 	>=x11-libs/gtk+-3.22:3[introspection]"
 DEPEND="${COMMON_DEPEND}
 	app-arch/unzip
@@ -30,22 +30,19 @@ DEPEND="${COMMON_DEPEND}
 	>=sys-devel/gettext-0.17-r1"
 RDEPEND="${COMMON_DEPEND}
 	$(python_gen_cond_dep '
-		dev-python/idna[${PYTHON_MULTI_USEDEP}]
 		dev-python/precis-i18n[${PYTHON_MULTI_USEDEP}]
 		dev-python/pycairo[${PYTHON_MULTI_USEDEP}]
 		dev-python/pycurl[${PYTHON_MULTI_USEDEP}]
 		dev-python/pygobject:3[cairo,${PYTHON_MULTI_USEDEP}]
 		>=dev-python/pyopenssl-0.14[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/python-nbxmpp-0.6.9[${PYTHON_MULTI_USEDEP}]
-		x11-libs/libXScrnSaver
 		dev-python/keyring[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/secretstorage-3.1.1[${PYTHON_MULTI_USEDEP}]
 		>=dev-python/cssutils-1.0.2[${PYTHON_MULTI_USEDEP}]
 		crypt? (
-			dev-python/pyasn1[${PYTHON_MULTI_USEDEP}]
-			app-crypt/libsecret[crypt,introspection]
 			dev-python/pycryptodome[${PYTHON_MULTI_USEDEP}]
 			>=dev-python/python-gnupg-0.4.0[${PYTHON_MULTI_USEDEP}] )
+		keyring? ( app-crypt/libsecret[crypt,introspection] )
 		geolocation? ( app-misc/geoclue[introspection] )
 		jingle? (
 			net-libs/farstream:0.2[introspection]
