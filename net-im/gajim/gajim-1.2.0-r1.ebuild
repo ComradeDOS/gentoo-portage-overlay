@@ -29,9 +29,7 @@ DEPEND="${COMMON_DEPEND}
 	>=sys-devel/gettext-0.17-r1"
 RDEPEND="${COMMON_DEPEND}
 	$(python_gen_cond_dep '
-		dev-python/idna[${PYTHON_USEDEP}]
 		dev-python/precis-i18n[${PYTHON_USEDEP}]
-		dev-python/pyasn1[${PYTHON_USEDEP}]
 		dev-python/pycairo[${PYTHON_USEDEP}]
 		dev-python/pycurl[${PYTHON_USEDEP}]
 		dev-python/pygobject:3[cairo,${PYTHON_USEDEP}]
