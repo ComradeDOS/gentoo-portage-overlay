@@ -3,7 +3,10 @@
 
 EAPI=7
 
-inherit flag-o-matic systemd
+LUA_COMPAT=( lua5-1 luajit )
+LUA_REQ_USE="deprecated(+)"
+
+inherit lua-single flag-o-matic systemd
 
 DESCRIPTION="Prosody is a flexible communications server for Jabber/XMPP written in Lua"
 HOMEPAGE="https://prosody.im/"
@@ -13,11 +16,11 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="ipv6 libevent mysql postgres sqlite ssl zlib luajit libressl"
+REQUIRED_USE="${LUA_REQUIRED_USE}"
 
 DEPEND="net-im/jabber-base
+		${LUA_DEPS}
 		dev-lua/LuaBitOp
-		!luajit? ( >=dev-lang/lua-5.1:0 )
-		luajit? ( dev-lang/luajit:2 )
 		>=net-dns/libidn-1.1:=
 		!libressl? ( dev-libs/openssl:0 ) libressl? ( dev-libs/libressl:= )"
 RDEPEND="${DEPEND}
