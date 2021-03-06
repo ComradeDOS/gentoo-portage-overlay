@@ -15,12 +15,10 @@ KEYWORDS="~amd64"
 IUSE=""
 RESTRICT="fetch mirror strip"
 
-DEPEND=" app-arch/gzip"
+DEPEND=""
 RDEPEND="${DEPEND}
-	dev-qt/qtcore:5
-	dev-qt/qtgui:5
 	dev-libs/icu
-	dev-libs/openssl:0=
+	x11-libs/xcb-util
 "
 S="${WORKDIR}"
 QA_PREBUILT="opt/pt/*"
@@ -45,4 +43,5 @@ src_install(){
 	for icon in pka pkt pkz; do
 		newicon -s 48x48 -c mimetypes opt/pt/art/${icon}.png application-x-${icon}.png
 	done
+	dobin opt/pt/packettracer
 }
