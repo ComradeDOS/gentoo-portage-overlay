@@ -22,6 +22,13 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig"
 
+
+src_prepare() {
+	default
+	eapply ${FILESDIR}/gpicview-0.2.5-gtk3_no_x.diff
+	eapply ${FILESDIR}/gpicview-0.2.5-gif_animation.diff
+}
+
 src_configure() {
 	if use gtk3; then
 		econf --enable-gtk3
