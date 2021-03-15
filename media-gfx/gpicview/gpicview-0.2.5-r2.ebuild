@@ -12,7 +12,6 @@ SRC_URI="mirror://sourceforge/lxde/${P}.tar.xz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ppc ~x86"
-IUSE=""
 
 RDEPEND="virtual/jpeg:0
 	x11-libs/gtk+:3"
@@ -22,7 +21,6 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 PATCHES=(
-	"${FILESDIR}/gpicview-0.2.5-gtk3_no_x.diff"
 	"${FILESDIR}/gpicview-0.2.5-gif_animation.diff"
 	"${FILESDIR}/Fix-displaying-images-with-GTK3.patch"
 )
