@@ -34,10 +34,6 @@ pkg_nofetch(){
 	ewarn "and then, you can proceed with the installation."
 }
 
-src_prepare(){
-	default
-}
-
 src_install(){
 	cp -r . "${ED}"
 	for icon in pka pkt pkz; do
