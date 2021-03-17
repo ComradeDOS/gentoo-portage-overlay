@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit xdg-utils
+inherit xdg
 
 DESCRIPTION="A Simple and Fast Image Viewer for X"
 HOMEPAGE="http://lxde.sourceforge.net/gpicview"
@@ -27,14 +27,4 @@ PATCHES=(
 
 src_configure() {
 	econf --enable-gtk3
-}
-
-pkg_postinst() {
-	xdg_desktop_database_update
-	xdg_icon_cache_update
-}
-
-pkg_postrm() {
-	xdg_desktop_database_update
-	xdg_icon_cache_update
 }
