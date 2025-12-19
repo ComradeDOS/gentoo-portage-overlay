@@ -1,0 +1,10 @@
+diff --git a/src/Makefile.am b/src/Makefile.am
+index ca9da13..3517b35 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -2,4 +2,4 @@ bin_PROGRAMS=xsane
+ xsane_SOURCES=gimpruler.c xsane-back-gtk.c xsane.c xsane-email-project.c xsane-front-gtk.c  xsane-icons.c xsane-preferences.c  xsane-rc-io.c  xsane-scan.c   xsane-viewer.c xsane-batch-scan.c  xsane-device-preferences.c  xsane-fax-project.c    xsane-gamma.c      xsane-multipage-project.c  xsane-preview.c      xsane-save.c   xsane-setup.c
+ 
+ xsane_CFLAGS=$(GTK3_CFLAGS) $(SANE_CFLAGS)  $(JPEG_CFLAGS) $(PNG_CFLAGS) $(LCMS2_CFLAGS) $(TIFF_CFLAGS) $(GIMP_CFLAGS)
+-xsane_LDADD=$(GTK3_LIBS) $(SANE_LIBS) ../lib/liblib.a $(JPEG_LIBS) $(PNG_LIBS) $(LCMS2_LIBS) $(TIFF_LIBS)  $(GIMP_LIBS)
++xsane_LDADD=$(GTK3_LIBS) $(SANE_LIBS) ../lib/liblib.a $(ZLIB_LIBS) $(JPEG_LIBS) $(PNG_LIBS) $(LCMS2_LIBS) $(TIFF_LIBS)  $(GIMP_LIBS)
